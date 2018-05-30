@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+  <head>
+   <title>Toiduaine lisamine</title>
+   <script>
+    let xhr=new XMLHttpRequest();
+    xhr.onreadystatechange=kuvaVastus;
+    function lisamine(){
+       let p2ring="a="+document.getElementById("kast1").value+
+          "&b="+document.getElementById("kast2").value+
+          "&c="+document.getElementById("kast3").value+
+          "&d="+document.getElementById("kast4").value;
+       xhr.open("GET", "lisamine?"+p2ring, true);
+       xhr.send(true);
+    }
+	
+	function eemaldamine(){
+       let p2ring="a="+document.getElementById("kast5").value;
+       xhr.open("GET", "kustutamine?"+p2ring, true);
+       xhr.send(true);
+    }
+	
+	function vaataAndmeid(){
+       let p2ring="a="+document.getElementById("kast6").value;
+       xhr.open("GET", "vaataAndmeid?"+p2ring, true);
+       xhr.send(true);
+    }
+
+	function otsiRasv(){
+       let p2ring="a="+document.getElementById("kast7").value+
+			"&b="+document.getElementById("kast8").value;
+       xhr.open("GET", "otsiRasvaj2rgi?"+p2ring, true);
+       xhr.send(true);
+    }
+	
+    function kuvaVastus(){
+       if(xhr.readyState==4){
+          document.getElementById("vastus").innerHTML=xhr.responseText;
+       }
+    }
+   </script>
+  </head>
+  <body>
+	
+	<div id="vastus">Siia tulevad kõik päringute vastused</div>
+  
+	<h1>Lisa toiduaine</h1>
+    <input type="text" value="" id="kast1" /> 
+    <input type="number" value="valk" id="kast2" />
+	<input type="number" value="rasv" id="kast3" />
+	<input type="number" value="süsivesik" id="kast4" />
+    <input type="button" value="Lisa andmebaasi" onclick="lisamine()" />
+	<br>
+	
+	<h1>Eemalda toiduaine</h1>
+    <input type="text" value="" id="kast5" /> 
+    <input type="button" value="Eemalda andmebaasist" onclick="eemaldamine()" />
+	<br>
+	
+	<h1>Vaata toiduaine andmeid</h1>
+    <input type="text" value="" id="kast6" /> 
+    <input type="button" value="Uuri andmeid" onclick="vaataAndmeid()" />
+	<br>
+	
+	<h1>Otsi toiduainet rasvaprotsendivahemiku järgi</h1>
+    <input type="number" value="Miinimum" id="kast7" />
+	<input type="number" value="Maksimum" id="kast8" />
+    <input type="button" value="Otsi andmebaasist" onclick="otsiRasv()" />
+	<br>
+	
+  </body>
+</html>
